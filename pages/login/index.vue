@@ -48,11 +48,4 @@ async function handleLogin() {
 .card {
   border: none
 }
-
-.rounded-card {
-  border-radius: 33px !important;
-}
-.rounded-btn {
-  border-radius: 22.5px !important;
-}
 </style>

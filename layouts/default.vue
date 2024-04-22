@@ -49,4 +49,11 @@ body {
   border-bottom: 1px solid #979797;
   border-radius: 0;
 }
+
+.rounded-card {
+  border-radius: 33px !important;
+}
+.rounded-btn {
+  border-radius: 22.5px !important;
+}
 </style>

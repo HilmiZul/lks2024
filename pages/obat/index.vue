@@ -17,7 +17,6 @@
                 <th>NAMA</th>
                 <th>EXPIRED</th>
                 <th>JUMLAH</th>
-                <th>HAPUS</th>
               </tr>
             </thead>
             <tbody>
@@ -27,7 +26,6 @@
                 <td>PARACETAMOL</td>
                 <td>22 April 2025</td>
                 <td>200</td>
-                <td>hapus</td>
               </tr>
             </tbody>
           </table>
