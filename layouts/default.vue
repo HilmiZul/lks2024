@@ -1,15 +1,12 @@
 <template>
-  <div class="">
-    <Navbar />
-    <!-- <span v-if="user">
-      <Navbar v-if="user.user_metadata.tipe_user == 'admin'" />
-      <NavbarApoteker v-if="user.user_metadata.tipe_user == 'apoteker'" />
-      <NavbarKasir v-if="user.user_metadata.tipe_user == 'kasir'" />
-    </span> -->
-    <div class="container-fluid">
+  <div class="container-fluid">
+    <!-- <Navbar /> -->
+      <span v-if="user">
+        <Navbar v-if="user.user_metadata.tipe_user == 'admin'" />
+        <NavbarApoteker v-if="user.user_metadata.tipe_user == 'apoteker'" />
+        <NavbarKasir v-if="user.user_metadata.tipe_user == 'kasir'" />
+      </span>
       <slot />
-    </div>
-
   </div>
 </template>
 
@@ -48,6 +45,10 @@ body {
   border: none;
   border-bottom: 1px solid #979797;
   border-radius: 0;
+  box-shadow: none !important;
+}
+.form-control:focus {
+  border-bottom: 1px solid #979797;
 }
 
 .rounded-card {

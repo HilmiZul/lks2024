@@ -7,28 +7,32 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-6">
-              <form>
+              <form @submit.prevent="insertObat">
                 <div class="mb-4">
                   <label>Kode Obat</label>
-                  <input type="text" class="form-control" required />
+                  <input v-model=form.Kode_Obat type="text" class="form-control" required autofocus/>
                 </div>
                 <div class="mb-4">
                   <label>Nama Obat</label>
-                  <input type="text" class="form-control" required />
+                  <input v-model=form.Nama_Obat type="text" class="form-control" required />
                 </div>
                 <div class="mb-4">
                   <label>Tangal Kadaluarsa</label>
-                  <input type="date" class="form-control" required />
+                  <input v-model=form.Expired_Date type="date" class="form-control" required />
                 </div>
                 <div class="mb-4">
                   <label>Jumlah</label>
-                  <input type="number" min="0" class="form-control" required />
+                  <input v-model=form.Jumlah type="number" min="0" class="form-control" required />
                 </div>
                 <div class="mb-4">
                   <label>(Rp) Harga</label>
-                  <input type="number" min="0" class="form-control" required />
+                  <input v-model=form.Harga type="number" min="0" class="form-control" required />
                 </div>
-                <button class="btn btn-grey rounded-btn px-5 py-2">Kirim</button>
+                <button class="btn btn-grey rounded-btn px-5 py-2" :disabled="isSaving">
+                  <span v-if="!isSaving">Simpan</span>
+                  <span v-else>Sedang menyimpan</span>
+                </button>
+                <NuxtLink to="/obat" class="btn btn-light float-end rounded-btn px-5 py-2">Kembali</NuxtLink>
               </form>
             </div>
           </div>
@@ -38,6 +42,31 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+definePageMeta({ middleware: 'auth-admin-apoteker' })
+
+const client = useSupabaseClient()
+const form = ref({
+  Kode_Obat: '',
+  Nama_Obat: '',
+  Expired_Date: '',
+  Jumlah: '',
+  Harga: '',
+})
+const isSaving = ref(false)
+
+async function insertObat() {
+  isSaving.value = true
+  const { data, error } = await client
+    .from('Tbl_Obat')
+    .insert([form.value])
+    .select()
+  if(data) {
+    isSaving.value = false
+    navigateTo('/obat')
+  }
+}
+
+</script>
 
 

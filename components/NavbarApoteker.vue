@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-12">
       <nav class="navbar navbar-expand-lg bg-light mx-2">
-        <a class="navbar-brand font-bold" href="#">12Jam</a>
+        <NuxtLink class="navbar-brand font-bold" to="/">12Jam</NuxtLink>
         <button
           class="navbar-toggler"
           type="button"
@@ -17,7 +17,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <NuxtLink to="/resep" class="nav-link">OBAT</NuxtLink>
+              <NuxtLink to="/obat" class="nav-link">OBAT</NuxtLink>
             </li>
             <li class="nav-item">
               <NuxtLink to="/resep" class="nav-link">RESEP</NuxtLink>

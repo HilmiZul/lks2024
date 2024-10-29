@@ -7,4 +7,5 @@
 </template>
 
 <script setup>
+definePageMeta({ middleware: 'auth-admin-kasir' })
 </script>

@@ -20,12 +20,12 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>PRC001</td>
-                <td>PARACETAMOL</td>
-                <td>22 April 2025</td>
-                <td>200</td>
+              <tr v-for="(item, i) in items" :key="i">
+                <td>{{ i+1 }}</td>
+                <td>{{ item.Kode_Obat }}</td>
+                <td>{{ item.Nama_Obat }}</td>
+                <td>{{ item.Expired_Date }}</td>
+                <td>{{ item.Jumlah }}</td>
               </tr>
             </tbody>
           </table>
@@ -36,4 +36,19 @@
 </template>
 
 <script setup>
+definePageMeta({ middleware: 'auth-admin-apoteker' })
+
+const client = useSupabaseClient()
+const items = ref([])
+
+const getObat = async () => {
+  const { data, error } = await client
+    .from('Tbl_Obat')
+    .select()
+    .range(0, 19)
+    .order('id', { ascending: false })
+  if(data) items.value = data
+}
+
+onMounted(() => getObat())
 </script>

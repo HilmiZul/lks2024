@@ -15,11 +15,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>fridareis</td>
-                <td>22 April 2024, 09:20:02</td>
-                <td>login</td>
+              <tr v-if="loading">
+                <td colspan="4" class="py-5 text-center text-muted">sedang memuat...</td>
+              </tr>
+              <tr v-for="(log, i) in logs" :key="i">
+                <td>{{ i+1 }}</td>
+                <td>{{ log.username }}</td>
+                <td>{{ log.Tanggal }}, {{ log.Waktu }}</td>
+                <td>{{ log.Aktivitas }}</td>
               </tr>
             </tbody>
           </table>
@@ -30,4 +33,24 @@
 </template>
 
 <script setup>
+definePageMeta({ middleware: 'auth-admin' })
+
+const client = useSupabaseClient()
+const logs = ref([])
+const loading = ref(true)
+
+const getLogs = async () => {
+  loading.value = true
+  const { data, error } = await client
+    .from('Tbl_LogActivity')
+    .select()
+    .range(0, 19)
+    .order('id', { ascending: false })
+  if(data) {
+    logs.value = data
+    loading.value = false
+  }
+}
+
+onMounted(() => getLogs())
 </script>

@@ -12,5 +12,21 @@ async function keluar() {
   if(!error) navigateTo('/login')
 }
 
-onMounted(() => keluar())
+async function insertLog() {
+  const user = useSupabaseUser()
+  const { data, error } = await supa
+    .from('Tbl_LogActivity')
+    .insert([{
+      Aktivitas: 'logout',
+      username: user.value.user_metadata.username,
+      nama: user.value.user_metadata.username,
+      tipe_user: user.value.user_metadata.tipe_user,
+    }])
+    .select()
+  if(data) keluar()
+}
+
+onMounted(() => {
+  insertLog()
+})
 </script>
